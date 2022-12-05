@@ -1,0 +1,169 @@
+2022-12-05 23:53:00,889:root:Slices Loaded
+2022-12-05 23:53:01,142:root:CT generated
+2022-12-05 23:53:01,199:root:Images Displayed
+2022-12-05 23:54:21,305:root:Slices Loaded
+2022-12-05 23:54:21,560:root:CT generated
+2022-12-05 23:54:21,618:root:Images Displayed
+2022-12-05 23:56:13,572:root:Slices Loaded
+2022-12-05 23:56:13,832:root:An error occurred in slices function ln 81: 'MainWidget' object has no attribute 'img'
+2022-12-05 23:56:31,358:root:An error occurred in browse function ln 52: string index out of range
+2022-12-05 23:56:34,681:root:Slices Loaded
+2022-12-05 23:56:34,973:root:An error occurred in slices function ln 81: 'MainWidget' object has no attribute 'img'
+2022-12-05 23:56:37,082:root:An error occurred in browse function ln 52: string index out of range
+2022-12-05 23:58:24,788:root:Slices Loaded
+2022-12-05 23:58:24,788:root:CT generated
+2022-12-05 23:58:24,788:root:Images Displayed
+2022-12-05 23:59:57,363:root:Slices Loaded
+2022-12-05 23:59:57,363:root:CT generated
+2022-12-05 23:59:57,619:root:An error occurred in slices function ln 81: 'MainWidget' object has no attribute 'img'
+2022-12-06 00:00:50,285:root:An error occurred in browse function ln 52: string index out of range
+2022-12-06 00:01:03,420:root:Slices Loaded
+2022-12-06 00:01:03,420:root:CT generated
+2022-12-06 00:01:03,720:root:Images Displayed
+2022-12-06 00:03:11,764:root:Slices Loaded
+2022-12-06 00:03:11,764:root:CT generated
+2022-12-06 00:03:12,066:root:Images Displayed
+2022-12-06 00:04:13,388:root:Slices Loaded
+2022-12-06 00:04:13,389:root:CT generated
+2022-12-06 00:04:13,693:root:Images Displayed
+2022-12-06 00:05:35,601:root:Slices Loaded
+2022-12-06 00:05:35,601:root:CT generated
+2022-12-06 00:05:35,904:root:Images Displayed
+2022-12-06 00:05:36,623:root:An error occurred in slices function ln 81: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+2022-12-06 00:05:58,841:root:An error occurred in slices function ln 81: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+2022-12-06 00:06:10,570:root:Slices Loaded
+2022-12-06 00:06:10,570:root:CT generated
+2022-12-06 00:06:10,875:root:Images Displayed
+2022-12-06 00:10:37,978:root:Slices Loaded
+2022-12-06 00:10:37,978:root:CT generated
+2022-12-06 00:10:38,283:root:Images Displayed
+2022-12-06 00:10:57,749:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,1,512) into shape (512,512)
+2022-12-06 00:12:48,826:root:Slices Loaded
+2022-12-06 00:12:48,826:root:CT generated
+2022-12-06 00:12:49,130:root:Images Displayed
+2022-12-06 00:16:23,106:root:Slices Loaded
+2022-12-06 00:16:23,106:root:CT generated
+2022-12-06 00:16:23,477:root:Images Displayed
+2022-12-06 00:29:44,414:root:Slices Loaded
+2022-12-06 00:29:44,414:root:CT generated
+2022-12-06 00:29:44,725:root:Images Displayed
+2022-12-06 00:31:04,090:root:Slices Loaded
+2022-12-06 00:31:04,090:root:CT generated
+2022-12-06 00:31:04,397:root:Images Displayed
+2022-12-06 00:37:54,927:root:Slices Loaded
+2022-12-06 00:37:54,927:root:CT generated
+2022-12-06 00:37:55,230:root:Images Displayed
+2022-12-06 00:38:30,413:root:Slices Loaded
+2022-12-06 00:38:30,413:root:CT generated
+2022-12-06 00:38:30,728:root:Images Displayed
+2022-12-06 00:39:33,743:root:Slices Loaded
+2022-12-06 00:39:33,743:root:CT generated
+2022-12-06 00:39:34,045:root:Images Displayed
+2022-12-06 00:39:36,512:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,251) into shape (512,512)
+2022-12-06 00:41:41,896:root:Slices Loaded
+2022-12-06 00:41:41,896:root:CT generated
+2022-12-06 00:41:42,242:root:Images Displayed
+2022-12-06 00:42:35,407:root:Slices Loaded
+2022-12-06 00:42:35,407:root:CT generated
+2022-12-06 00:42:35,730:root:Images Displayed
+2022-12-06 00:44:06,690:root:Slices Loaded
+2022-12-06 00:44:06,690:root:CT generated
+2022-12-06 00:44:07,008:root:Images Displayed
+2022-12-06 00:47:12,837:root:Slices Loaded
+2022-12-06 00:47:12,837:root:CT generated
+2022-12-06 00:47:13,155:root:Images Displayed
+2022-12-06 00:47:15,722:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,) into shape (512,234)
+2022-12-06 00:50:10,183:root:Slices Loaded
+2022-12-06 00:50:10,183:root:CT generated
+2022-12-06 00:50:10,500:root:Images Displayed
+2022-12-06 00:51:07,674:root:Slices Loaded
+2022-12-06 00:51:07,675:root:CT generated
+2022-12-06 00:51:08,004:root:Images Displayed
+2022-12-06 00:51:18,621:root:An error occurred in slices function ln 81: index 512 is out of bounds for axis 0 with size 512
+2022-12-06 01:02:41,087:root:Slices Loaded
+2022-12-06 01:02:41,088:root:CT generated
+2022-12-06 01:02:41,448:root:Images Displayed
+2022-12-06 01:04:04,603:root:Slices Loaded
+2022-12-06 01:04:04,604:root:CT generated
+2022-12-06 01:04:05,345:root:Images Displayed
+2022-12-06 01:04:27,185:root:Slices Loaded
+2022-12-06 01:04:27,186:root:CT generated
+2022-12-06 01:04:27,498:root:Images Displayed
+2022-12-06 01:04:47,951:root:Slices Loaded
+2022-12-06 01:04:47,951:root:CT generated
+2022-12-06 01:04:48,323:root:Images Displayed
+2022-12-06 01:04:55,678:root:Slices Loaded
+2022-12-06 01:04:55,678:root:CT generated
+2022-12-06 01:04:55,990:root:Images Displayed
+2022-12-06 01:05:49,088:root:Slices Loaded
+2022-12-06 01:05:49,088:root:CT generated
+2022-12-06 01:05:49,426:root:Images Displayed
+2022-12-06 01:06:08,967:root:Slices Loaded
+2022-12-06 01:06:08,967:root:CT generated
+2022-12-06 01:06:09,283:root:Images Displayed
+2022-12-06 01:06:09,882:root:An error occurred in slices function ln 81: index 522 is out of bounds for axis 1 with size 512
+2022-12-06 01:06:49,391:root:Slices Loaded
+2022-12-06 01:06:49,391:root:CT generated
+2022-12-06 01:06:49,704:root:Images Displayed
+2022-12-06 01:07:32,228:root:Slices Loaded
+2022-12-06 01:07:32,228:root:CT generated
+2022-12-06 01:07:32,558:root:Images Displayed
+2022-12-06 01:12:53,934:root:Slices Loaded
+2022-12-06 01:12:53,934:root:CT generated
+2022-12-06 01:12:54,271:root:Images Displayed
+2022-12-06 01:13:50,451:root:Slices Loaded
+2022-12-06 01:13:50,451:root:CT generated
+2022-12-06 01:13:50,758:root:Images Displayed
+2022-12-06 01:21:25,079:root:Slices Loaded
+2022-12-06 01:21:25,079:root:CT generated
+2022-12-06 01:21:25,401:root:Images Displayed
+2022-12-06 01:22:37,648:root:Slices Loaded
+2022-12-06 01:22:37,649:root:CT generated
+2022-12-06 01:22:37,924:root:An error occurred in slices function ln 81: name 'img_shape' is not defined
+2022-12-06 01:23:32,234:root:An error occurred in browse function ln 52: string index out of range
+2022-12-06 01:23:44,965:root:Slices Loaded
+2022-12-06 01:23:44,965:root:CT generated
+2022-12-06 01:23:45,294:root:Images Displayed
+2022-12-06 01:24:41,532:root:Slices Loaded
+2022-12-06 01:24:41,533:root:CT generated
+2022-12-06 01:24:41,853:root:Images Displayed
+2022-12-06 01:25:23,943:root:Slices Loaded
+2022-12-06 01:25:23,943:root:CT generated
+2022-12-06 01:25:24,222:root:An error occurred in slices function ln 81: 'tuple' object has no attribute 'shape'
+2022-12-06 01:25:41,480:root:An error occurred in browse function ln 52: string index out of range
+2022-12-06 01:25:50,732:root:Slices Loaded
+2022-12-06 01:25:50,732:root:CT generated
+2022-12-06 01:25:51,052:root:Images Displayed
+2022-12-06 01:26:27,617:root:Slices Loaded
+2022-12-06 01:26:27,617:root:CT generated
+2022-12-06 01:26:27,939:root:Images Displayed
+2022-12-06 01:27:15,301:root:Slices Loaded
+2022-12-06 01:27:15,301:root:CT generated
+2022-12-06 01:27:15,621:root:Images Displayed
+2022-12-06 01:28:00,563:root:Slices Loaded
+2022-12-06 01:28:00,563:root:CT generated
+2022-12-06 01:28:00,882:root:Images Displayed
+2022-12-06 01:28:25,568:root:Slices Loaded
+2022-12-06 01:28:25,568:root:CT generated
+2022-12-06 01:28:25,916:root:Images Displayed
+2022-12-06 01:29:07,418:root:Slices Loaded
+2022-12-06 01:29:07,418:root:CT generated
+2022-12-06 01:29:07,741:root:Images Displayed
+2022-12-06 01:29:11,446:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,1,512) into shape (512,512)
+2022-12-06 01:29:41,488:root:Slices Loaded
+2022-12-06 01:29:41,488:root:CT generated
+2022-12-06 01:29:41,822:root:Images Displayed
+2022-12-06 01:29:44,725:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,1,512) into shape (512,512)
+2022-12-06 01:30:36,329:root:Slices Loaded
+2022-12-06 01:30:36,329:root:CT generated
+2022-12-06 01:30:36,645:root:Images Displayed
+2022-12-06 01:30:39,821:root:An error occurred in slices function ln 81: could not broadcast input array from shape (512,1,512) into shape (512,512)
+2022-12-06 01:31:29,047:root:Slices Loaded
+2022-12-06 01:31:29,047:root:CT generated
+2022-12-06 01:31:29,368:root:Images Displayed
+2022-12-06 01:32:19,522:root:Slices Loaded
+2022-12-06 01:32:19,522:root:CT generated
+2022-12-06 01:32:19,899:root:Images Displayed
+2022-12-06 01:32:54,035:root:Slices Loaded
+2022-12-06 01:32:54,035:root:CT generated
+2022-12-06 01:32:54,367:root:Images Displayed

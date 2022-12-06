@@ -30,9 +30,15 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.axial = None
         self.coronal = None
         self.sagital = None
+
         self.Open_Button.clicked.connect(self.browse)
-        self.horizontalSlider_2.valueChanged.connect(self.generate_slice_vertical)
-        self.verticalSlider_2.valueChanged.connect(self.generate_slice_horizontal)
+        self.horizontalSlider_2.valueChanged.connect(partial(self.generate_slice_vertical, axis='axial'))
+        self.verticalSlider_2.valueChanged.connect(partial(self.generate_slice_horizontal, axis='axial'))
+        self.horizontalSlider_3.valueChanged.connect(partial(self.generate_slice_vertical, axis='coronal'))
+        self.verticalSlider_3.valueChanged.connect(partial(self.generate_slice_horizontal, axis='coronal'))
+        self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, axis='sagital'))
+        self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, axis='sagital'))
+
 
     def gen_layout(self, x):
         """
@@ -94,7 +100,7 @@ class MainWidget(QWidget, ui.Ui_Form):
             msg.exec_()
             self.browse()
         
-    def generate_image(self, slices, pos=None, pos_x=None, pos_y=None):
+    def generate_image(self, slices, axis=None, pos=None, pos_x=None, pos_y=None):
         try:
             # assuming all slices have the same pixel aspects, so using only the first
             # if not should be in the loop.
@@ -105,7 +111,6 @@ class MainWidget(QWidget, ui.Ui_Form):
             cor_aspect = ss/ps[0]
 
             self.img_shape = list(slices[0].pixel_array.shape)
-            print(self.img_shape)
             self.img_shape.append(len(slices))
             img3d = np.zeros(self.img_shape)
             for i, s in enumerate(slices):
@@ -122,16 +127,32 @@ class MainWidget(QWidget, ui.Ui_Form):
                 self.sagital = (np.rot90(img3d[:, self.img_shape[1]//2, :]), sag_aspect)
                 self.axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
 
-            coronal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), cor_aspect)
-            sagital = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), sag_aspect)
+            if axis == 'axial':
+                coronal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), cor_aspect)
+                sagital = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), sag_aspect)
 
-            print(sagital[0].shape)
+                if pos == 'x':
+                    self.coronal = coronal
+                elif pos == 'y':
+                    self.sagital = sagital
 
-            axial = (img3d[:, :, self.img_shape[2] // 2], ax_aspect)
-            if pos == 'x':
-                self.coronal = coronal
-            elif pos == 'y':
-                self.sagital = sagital
+            elif axis == 'coronal':
+                axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
+                sagital = (np.rot90(img3d[self.img_shape[1] // 2, :, :]), sag_aspect)
+
+                if pos == 'x':
+                    self.axial = axial
+                elif pos == 'y':
+                    self.sagital = sagital
+
+            elif axis == 'sagital':
+                axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
+                coronal = (np.rot90(img3d[self.img_shape[2] // 2, :, :]), cor_aspect)
+                if pos == 'x':
+                    self.coronal = coronal
+                elif pos == 'y':
+                    self.axial = axial
+
             self.display(self.axial, self.coronal, self.sagital)
 
         except Exception as e:
@@ -143,17 +164,16 @@ class MainWidget(QWidget, ui.Ui_Form):
             msg.exec_()
             self.browse()
 
-    def generate_slice_vertical(self, value):
+    def generate_slice_vertical(self, value, axis):
         try:
-            self.generate_image(slices=self.slices, pos='x', pos_x=int((value/100) * self.img_shape[0]))
+            self.generate_image(slices=self.slices, pos='x', pos_x=int((value/100) * self.img_shape[0]), axis=axis)
 
         except Exception as e:
             print(e)
 
-    def generate_slice_horizontal(self, value):
+    def generate_slice_horizontal(self, value, axis):
         try:
-            print(value)
-            self.generate_image(slices=self.slices, pos='y', pos_y=int((value/100) * self.img_shape[0]))
+            self.generate_image(slices=self.slices, pos='y', pos_y=int((value/100) * self.img_shape[0]), axis=axis)
 
         except Exception as e:
             print(e)

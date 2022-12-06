@@ -167,3 +167,99 @@
 2022-12-06 01:32:54,035:root:Slices Loaded
 2022-12-06 01:32:54,035:root:CT generated
 2022-12-06 01:32:54,367:root:Images Displayed
+2022-12-06 03:36:32,076:root:Slices Loaded
+2022-12-06 03:36:32,076:root:CT generated
+2022-12-06 03:36:32,076:root:An error occurred in browse function ln 52: MainWidget.generate_image() missing 1 required positional argument: 'axis'
+2022-12-06 03:37:28,865:root:Slices Loaded
+2022-12-06 03:37:28,865:root:CT generated
+2022-12-06 03:37:29,204:root:Images Displayed
+2022-12-06 03:38:30,805:root:Slices Loaded
+2022-12-06 03:38:30,805:root:CT generated
+2022-12-06 03:38:31,110:root:Images Displayed
+2022-12-06 03:38:41,467:root:An error occurred in slices function ln 81: index 512 is out of bounds for axis 0 with size 512
+2022-12-06 03:39:51,008:root:Slices Loaded
+2022-12-06 03:39:51,008:root:CT generated
+2022-12-06 03:39:51,313:root:Images Displayed
+2022-12-06 03:40:26,861:root:Slices Loaded
+2022-12-06 03:40:26,861:root:CT generated
+2022-12-06 03:40:27,169:root:Images Displayed
+2022-12-06 03:40:58,388:root:Slices Loaded
+2022-12-06 03:40:58,388:root:CT generated
+2022-12-06 03:40:58,691:root:Images Displayed
+2022-12-06 03:41:19,406:root:Slices Loaded
+2022-12-06 03:41:19,406:root:CT generated
+2022-12-06 03:41:19,709:root:Images Displayed
+2022-12-06 03:41:45,917:root:Slices Loaded
+2022-12-06 03:41:45,917:root:CT generated
+2022-12-06 03:41:46,221:root:Images Displayed
+2022-12-06 03:42:14,957:root:Slices Loaded
+2022-12-06 03:42:14,957:root:CT generated
+2022-12-06 03:42:15,265:root:Images Displayed
+2022-12-06 03:42:50,820:root:Slices Loaded
+2022-12-06 03:42:50,820:root:CT generated
+2022-12-06 03:42:51,124:root:Images Displayed
+2022-12-06 03:43:23,558:root:Slices Loaded
+2022-12-06 03:43:23,558:root:CT generated
+2022-12-06 03:43:23,866:root:Images Displayed
+2022-12-06 03:43:24,412:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:44:14,471:root:Slices Loaded
+2022-12-06 03:44:14,471:root:CT generated
+2022-12-06 03:44:14,776:root:Images Displayed
+2022-12-06 03:44:16,010:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:44:19,191:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:44:22,248:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:45:10,870:root:Slices Loaded
+2022-12-06 03:45:10,871:root:CT generated
+2022-12-06 03:45:11,180:root:Images Displayed
+2022-12-06 03:45:53,222:root:Slices Loaded
+2022-12-06 03:45:53,222:root:CT generated
+2022-12-06 03:45:53,535:root:Images Displayed
+2022-12-06 03:46:43,413:root:Slices Loaded
+2022-12-06 03:46:43,413:root:CT generated
+2022-12-06 03:46:43,717:root:Images Displayed
+2022-12-06 03:47:27,875:root:Slices Loaded
+2022-12-06 03:47:27,875:root:CT generated
+2022-12-06 03:47:28,206:root:Images Displayed
+2022-12-06 03:47:29,078:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:47:32,771:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:47:43,527:root:Slices Loaded
+2022-12-06 03:47:43,527:root:CT generated
+2022-12-06 03:47:43,833:root:Images Displayed
+2022-12-06 03:47:51,283:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:47:54,235:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:48:08,663:root:Slices Loaded
+2022-12-06 03:48:08,664:root:CT generated
+2022-12-06 03:48:08,966:root:Images Displayed
+2022-12-06 03:48:09,479:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:48:12,476:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:48:22,748:root:Slices Loaded
+2022-12-06 03:48:22,748:root:CT generated
+2022-12-06 03:48:23,051:root:Images Displayed
+2022-12-06 03:49:48,395:root:Slices Loaded
+2022-12-06 03:49:48,395:root:CT generated
+2022-12-06 03:49:48,700:root:Images Displayed
+2022-12-06 03:50:38,355:root:Slices Loaded
+2022-12-06 03:50:38,355:root:CT generated
+2022-12-06 03:50:38,657:root:Images Displayed
+2022-12-06 03:52:19,249:root:Slices Loaded
+2022-12-06 03:52:19,249:root:CT generated
+2022-12-06 03:52:19,565:root:Images Displayed
+2022-12-06 03:53:01,460:root:Slices Loaded
+2022-12-06 03:53:01,460:root:CT generated
+2022-12-06 03:53:01,773:root:Images Displayed
+2022-12-06 03:53:55,504:root:Slices Loaded
+2022-12-06 03:53:55,504:root:CT generated
+2022-12-06 03:53:55,810:root:Images Displayed
+2022-12-06 03:54:38,085:root:Slices Loaded
+2022-12-06 03:54:38,085:root:CT generated
+2022-12-06 03:54:38,389:root:Images Displayed
+2022-12-06 03:54:39,806:root:An error occurred in slices function ln 81: index 256 is out of bounds for axis 2 with size 234
+2022-12-06 03:55:39,300:root:Slices Loaded
+2022-12-06 03:55:39,300:root:CT generated
+2022-12-06 03:55:39,615:root:Images Displayed
+2022-12-06 04:00:16,079:root:Slices Loaded
+2022-12-06 04:00:16,079:root:CT generated
+2022-12-06 04:00:16,389:root:Images Displayed
+2022-12-06 04:02:12,872:root:Slices Loaded
+2022-12-06 04:02:12,873:root:CT generated
+2022-12-06 04:02:13,178:root:Images Displayed

@@ -123,6 +123,7 @@ class MainWidget(QWidget, ui.Ui_Form):
                 self.slices.append(pydicom.dcmread(f'{folder}/{file}'))
             logging.info('self.slices Loaded')
 
+            # self.img, self.axial, self.sag, self.cor = self.generate_image(self.slices)
             logging.info('CT generated')
             self.generate_image(self.slices)
 

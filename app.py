@@ -30,6 +30,12 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.axial = None
         self.coronal = None
         self.sagital = None
+        self.ax_value_x = 0.5
+        self.ax_value_y = 0.5
+        self.cor_value_x = 0.5
+        self.cor_value_y = 0.5
+        self.sag_value_x = 0.5
+        self.sag_value_y = 0.5
 
         self.Open_Button.clicked.connect(self.browse)
         self.horizontalSlider_2.valueChanged.connect(partial(self.generate_slice_vertical, axis='axial'))
@@ -39,8 +45,8 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, axis='sagital'))
         self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, axis='sagital'))
 
-
-    def gen_layout(self, x):
+    @staticmethod
+    def gen_layout(x):
         """
         A function to add the widget to GUI to make initiation easier.
         params:
@@ -62,16 +68,19 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.cor_widget, self.layout_vertical2 = self.gen_layout(self.Display_2)
         self.sag_widget, self.layout_vertical3 = self.gen_layout(self.Display_3)
 
-    def display(self, axial, coronal, sagital):
+    @staticmethod
+    def display_single_plot(img, aspect, widget, value_x, value_y):
+        widget.axis.clear()
+        print(value_y)
+        widget.axis.axhline(y=img.shape[0] * (1-value_y), color='r')
+        widget.axis.axvline(x=img.shape[1] * value_x, color='b')
+        widget.axis.imshow(img, cmap='gray', aspect=aspect)
+        widget.canvas.draw()
 
-        # self.img_widget.axis.imshow(self.img, cmap='gray')
-        self.img_widget.canvas.draw()
-        self.axial_widget.axis.imshow(axial[0], aspect=axial[1], cmap='gray')
-        self.axial_widget.canvas.draw()
-        self.cor_widget.axis.imshow(coronal[0], aspect=coronal[1], cmap='gray')
-        self.cor_widget.canvas.draw()
-        self.sag_widget.axis.imshow(sagital[0], aspect=coronal[1], cmap='gray')
-        self.sag_widget.canvas.draw()
+    def display(self, axial, coronal, sagital):
+        self.display_single_plot(axial[0], axial[1], self.axial_widget, self.ax_value_x, self.ax_value_y)
+        self.display_single_plot(coronal[0], coronal[1], self.cor_widget, self.cor_value_x, self.cor_value_y)
+        self.display_single_plot(sagital[0], sagital[1], self.sag_widget, self.sag_value_x, self.sag_value_y)
 
     def browse(self):
         self.folder = QFileDialog.getExistingDirectory(self, "Choose Folder")
@@ -132,8 +141,10 @@ class MainWidget(QWidget, ui.Ui_Form):
                 sagital = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), sag_aspect)
 
                 if pos == 'x':
+                    self.ax_value_x = pos_x / self.img_shape[0]
                     self.coronal = coronal
                 elif pos == 'y':
+                    self.ax_value_y = pos_y / self.img_shape[1]
                     self.sagital = sagital
 
             elif axis == 'coronal':
@@ -141,16 +152,20 @@ class MainWidget(QWidget, ui.Ui_Form):
                 sagital = (np.rot90(img3d[self.img_shape[1] // 2, :, :]), sag_aspect)
 
                 if pos == 'x':
+                    self.cor_value_x = pos_x / self.img_shape[0]
                     self.axial = axial
                 elif pos == 'y':
+                    self.cor_value_y = pos_y / self.img_shape[1]
                     self.sagital = sagital
 
             elif axis == 'sagital':
                 axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
                 coronal = (np.rot90(img3d[self.img_shape[2] // 2, :, :]), cor_aspect)
                 if pos == 'x':
+                    self.sag_value_x = pos_x / self.img_shape[0]
                     self.coronal = coronal
                 elif pos == 'y':
+                    self.sag_value_y = pos_y / self.img_shape[1]
                     self.axial = axial
 
             self.display(self.axial, self.coronal, self.sagital)

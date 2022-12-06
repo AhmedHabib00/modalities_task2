@@ -21,7 +21,7 @@ class MatplotWidget(QWidget):
         self.layout_vertical = QVBoxLayout(self)
         self.layout_vertical.addWidget(self.canvas)
 
-    
+
 class MainWidget(QWidget, ui.Ui_Form):
     def __init__(self):
         super(MainWidget, self).__init__()
@@ -48,12 +48,12 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.sag_value_y = 0.5
 
         self.Open_Button.clicked.connect(self.browse)
-        self.horizontalSlider_2.valueChanged.connect(partial(self.generate_slice_vertical, axis='axial'))
-        self.verticalSlider_2.valueChanged.connect(partial(self.generate_slice_horizontal, axis='axial'))
-        self.horizontalSlider_3.valueChanged.connect(partial(self.generate_slice_vertical, axis='coronal'))
-        self.verticalSlider_3.valueChanged.connect(partial(self.generate_slice_horizontal, axis='coronal'))
-        self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, axis='sagittal'))
-        self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, axis='sagittal'))
+        self.horizontalSlider_2.valueChanged.connect(partial(self.generate_slice_vertical, plane='axial'))
+        self.verticalSlider_2.valueChanged.connect(partial(self.generate_slice_horizontal, plane='axial'))
+        self.horizontalSlider_3.valueChanged.connect(partial(self.generate_slice_vertical, plane='coronal'))
+        self.verticalSlider_3.valueChanged.connect(partial(self.generate_slice_horizontal, plane='coronal'))
+        self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, plane='sagittal'))
+        self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, plane='sagittal'))
 
     @staticmethod
     def gen_layout(x):
@@ -73,10 +73,13 @@ class MainWidget(QWidget, ui.Ui_Form):
         A function to initiate the widgets for display.
         """
         # axial - coronal - sag - oblique
-        self.img_widget, self.layout_vertical4 = self.gen_layout(self.Display_4)
-        self.axial_widget, self.layout_vertical1 = self.gen_layout(self.Display_1)
-        self.cor_widget, self.layout_vertical2 = self.gen_layout(self.Display_2)
-        self.sag_widget, self.layout_vertical3 = self.gen_layout(self.Display_3)
+        try:
+            self.img_widget, self.layout_vertical4 = self.gen_layout(self.Display_4)
+            self.axial_widget, self.layout_vertical1 = self.gen_layout(self.Display_1)
+            self.cor_widget, self.layout_vertical2 = self.gen_layout(self.Display_2)
+            self.sag_widget, self.layout_vertical3 = self.gen_layout(self.Display_3)
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def display_single_plot(img, aspect, widget, value_x, value_y):
@@ -90,11 +93,14 @@ class MainWidget(QWidget, ui.Ui_Form):
         :param value_y: the y position of the slider for the line
         :return: None
         """
-        widget.axis.clear()
-        widget.axis.axhline(y=img.shape[0] * (1-value_y), color='r')
-        widget.axis.axvline(x=img.shape[1] * value_x, color='b')
-        widget.axis.imshow(img, cmap='gray', aspect=aspect)
-        widget.canvas.draw()
+        try:
+            widget.axis.clear()
+            widget.axis.axhline(y=img.shape[0] * (1 - value_y), color='r')
+            widget.axis.axvline(x=img.shape[1] * value_x, color='b')
+            widget.axis.imshow(img, cmap='gray', aspect=aspect)
+            widget.canvas.draw()
+        except Exception as e:
+            print(e)
 
     def display(self, axial, coronal, sagittal):
         """
@@ -105,9 +111,12 @@ class MainWidget(QWidget, ui.Ui_Form):
         :param sagittal: the sagittal plane image
         :return:
         """
-        self.display_single_plot(axial[0], axial[1], self.axial_widget, self.ax_value_x, self.ax_value_y)
-        self.display_single_plot(coronal[0], coronal[1], self.cor_widget, self.cor_value_x, self.cor_value_y)
-        self.display_single_plot(sagittal[0], sagittal[1], self.sag_widget, self.sag_value_x, self.sag_value_y)
+        try:
+            self.display_single_plot(axial[0], axial[1], self.axial_widget, self.ax_value_x, self.ax_value_y)
+            self.display_single_plot(coronal[0], coronal[1], self.cor_widget, self.cor_value_x, self.cor_value_y)
+            self.display_single_plot(sagittal[0], sagittal[1], self.sag_widget, self.sag_value_x, self.sag_value_y)
+        except Exception as e:
+            print(e)
 
     def browse(self):
         """
@@ -123,7 +132,6 @@ class MainWidget(QWidget, ui.Ui_Form):
                 self.slices.append(pydicom.dcmread(f'{folder}/{file}'))
             logging.info('self.slices Loaded')
 
-            # self.img, self.axial, self.sag, self.cor = self.generate_image(self.slices)
             logging.info('CT generated')
             self.generate_image(self.slices)
 
@@ -139,7 +147,7 @@ class MainWidget(QWidget, ui.Ui_Form):
             msg.setWindowTitle("Error")
             msg.exec_()
             self.browse()
-        
+
     def generate_image(self, slices, plane=None, pos=None, pos_x=None, pos_y=None):
         """
         A function to generate the image from the slices, handle the change in the sliders and display the image
@@ -157,9 +165,9 @@ class MainWidget(QWidget, ui.Ui_Form):
             # if not should be in the loop.
             ps = slices[0].PixelSpacing
             ss = slices[0].SliceThickness
-            ax_aspect = ps[1]/ps[0]
-            sag_aspect = ps[1]/ss
-            cor_aspect = ss/ps[0]
+            ax_aspect = ps[1] / ps[0]
+            sag_aspect = ps[1] / ss
+            cor_aspect = ss / ps[0]
 
             self.img_shape = list(slices[0].pixel_array.shape)
             self.img_shape.append(len(slices))
@@ -174,9 +182,9 @@ class MainWidget(QWidget, ui.Ui_Form):
                 img3d[:, :, i] = img2d
 
             if pos is None:
-                self.coronal = (np.rot90(img3d[self.img_shape[0]//2, :, :]), cor_aspect)
-                self.sagittal = (np.rot90(img3d[:, self.img_shape[1]//2, :]), sag_aspect)
-                self.axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
+                self.coronal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), cor_aspect)
+                self.sagittal = (np.rot90(img3d[:, self.img_shape[1] // 2, :]), sag_aspect)
+                self.axial = (img3d[:, :, self.img_shape[2] // 2], ax_aspect)
 
             if plane == 'axial':
                 coronal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), cor_aspect)
@@ -190,7 +198,7 @@ class MainWidget(QWidget, ui.Ui_Form):
                     self.sagittal = sagittal
 
             elif plane == 'coronal':
-                axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
+                axial = (img3d[:, :, self.img_shape[2] // 2], ax_aspect)
                 sagittal = (np.rot90(img3d[self.img_shape[1] // 2, :, :]), sag_aspect)
 
                 if pos == 'x':
@@ -201,7 +209,7 @@ class MainWidget(QWidget, ui.Ui_Form):
                     self.sagittal = sagittal
 
             elif plane == 'sagittal':
-                axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
+                axial = (img3d[:, :, self.img_shape[2] // 2], ax_aspect)
                 coronal = (np.rot90(img3d[self.img_shape[2] // 2, :, :]), cor_aspect)
                 if pos == 'x':
                     self.sag_value_x = pos_x / self.img_shape[0]
@@ -231,7 +239,7 @@ class MainWidget(QWidget, ui.Ui_Form):
         :return:
         """
         try:
-            self.generate_image(slices=self.slices, pos='x', pos_x=int((value/100) * self.img_shape[0]), plane=plane)
+            self.generate_image(slices=self.slices, pos='x', pos_x=int((value / 100) * self.img_shape[0]), plane=plane)
 
         except Exception as e:
             print(e)
@@ -246,7 +254,7 @@ class MainWidget(QWidget, ui.Ui_Form):
         :return:
         """
         try:
-            self.generate_image(slices=self.slices, pos='y', pos_y=int((value/100) * self.img_shape[0]), plane=plane)
+            self.generate_image(slices=self.slices, pos='y', pos_y=int((value / 100) * self.img_shape[0]), plane=plane)
 
         except Exception as e:
             print(e)

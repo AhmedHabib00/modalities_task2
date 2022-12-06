@@ -25,11 +25,21 @@ class MatplotWidget(QWidget):
 class MainWidget(QWidget, ui.Ui_Form):
     def __init__(self):
         super(MainWidget, self).__init__()
+        self.layout_vertical3 = None
+        self.cor_widget = None
+        self.layout_vertical2 = None
+        self.sag_widget = None
+        self.layout_vertical1 = None
+        self.axial_widget = None
+        self.layout_vertical4 = None
+        self.img_widget = None
         self.setupUi(self)
         self.init_widget()
         self.axial = None
         self.coronal = None
-        self.sagital = None
+        self.sagittal = None
+        self.img_shape = None
+        self.slices = None
         self.ax_value_x = 0.5
         self.ax_value_y = 0.5
         self.cor_value_x = 0.5
@@ -42,8 +52,8 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.verticalSlider_2.valueChanged.connect(partial(self.generate_slice_horizontal, axis='axial'))
         self.horizontalSlider_3.valueChanged.connect(partial(self.generate_slice_vertical, axis='coronal'))
         self.verticalSlider_3.valueChanged.connect(partial(self.generate_slice_horizontal, axis='coronal'))
-        self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, axis='sagital'))
-        self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, axis='sagital'))
+        self.horizontalSlider_4.valueChanged.connect(partial(self.generate_slice_vertical, axis='sagittal'))
+        self.verticalSlider_4.valueChanged.connect(partial(self.generate_slice_horizontal, axis='sagittal'))
 
     @staticmethod
     def gen_layout(x):
@@ -53,10 +63,10 @@ class MainWidget(QWidget, ui.Ui_Form):
         x: the widget to be added to the GUI.
         return: widget, layout
         """
-        w = MatplotWidget()
-        l = QVBoxLayout(x)
-        l.addWidget(w)
-        return w, l
+        widget = MatplotWidget()
+        layout = QVBoxLayout(x)
+        layout.addWidget(widget)
+        return widget, layout
 
     def init_widget(self):
         """
@@ -70,29 +80,49 @@ class MainWidget(QWidget, ui.Ui_Form):
 
     @staticmethod
     def display_single_plot(img, aspect, widget, value_x, value_y):
+        """
+        A function to display a single image given a plane.
+        params:
+        :param img: the image to be displayed
+        :param aspect: the aspect ratio of the image
+        :param widget: the gui widget to display the image on
+        :param value_x: the x position of the slider for the line
+        :param value_y: the y position of the slider for the line
+        :return: None
+        """
         widget.axis.clear()
-        print(value_y)
         widget.axis.axhline(y=img.shape[0] * (1-value_y), color='r')
         widget.axis.axvline(x=img.shape[1] * value_x, color='b')
         widget.axis.imshow(img, cmap='gray', aspect=aspect)
         widget.canvas.draw()
 
-    def display(self, axial, coronal, sagital):
+    def display(self, axial, coronal, sagittal):
+        """
+        A function to display all planes of the image.
+        params:
+        :param axial: the axial plane image
+        :param coronal: the coronal plane image
+        :param sagittal: the sagittal plane image
+        :return:
+        """
         self.display_single_plot(axial[0], axial[1], self.axial_widget, self.ax_value_x, self.ax_value_y)
         self.display_single_plot(coronal[0], coronal[1], self.cor_widget, self.cor_value_x, self.cor_value_y)
-        self.display_single_plot(sagital[0], sagital[1], self.sag_widget, self.sag_value_x, self.sag_value_y)
+        self.display_single_plot(sagittal[0], sagittal[1], self.sag_widget, self.sag_value_x, self.sag_value_y)
 
     def browse(self):
-        self.folder = QFileDialog.getExistingDirectory(self, "Choose Folder")
-        if self.folder[0] == "":
+        """
+        A function to browse the file and display the image.
+        :return: None
+        """
+        folder = QFileDialog.getExistingDirectory(self, "Choose Folder")
+        if folder[0] == "":
             return
         try:
             self.slices = []
-            for file in os.listdir(self.folder):
-                self.slices.append(pydicom.dcmread(f'{self.folder}/{file}'))
-            logging.info('Slices Loaded')
+            for file in os.listdir(folder):
+                self.slices.append(pydicom.dcmread(f'{folder}/{file}'))
+            logging.info('self.slices Loaded')
 
-            # self.img, self.axial, self.sag, self.cor = self.generate_image(self.slices)
             logging.info('CT generated')
             self.generate_image(self.slices)
 
@@ -109,7 +139,18 @@ class MainWidget(QWidget, ui.Ui_Form):
             msg.exec_()
             self.browse()
         
-    def generate_image(self, slices, axis=None, pos=None, pos_x=None, pos_y=None):
+    def generate_image(self, slices, plane=None, pos=None, pos_x=None, pos_y=None):
+        """
+        A function to generate the image from the slices, handle the change in the sliders and display the image
+         accordingly.
+        params:
+        :param slices: the slices read from the dicom files
+        :param plane: the plane from which the slider was moved {axial, coronal, sagittal}
+        :param pos: the orientation of the slider {horizontal, vertical}
+        :param pos_x: the position of the slider in the x-axis
+        :param pos_y: the position of the slider in the y-axis
+        :return: None
+        """
         try:
             # assuming all slices have the same pixel aspects, so using only the first
             # if not should be in the loop.
@@ -133,32 +174,32 @@ class MainWidget(QWidget, ui.Ui_Form):
 
             if pos is None:
                 self.coronal = (np.rot90(img3d[self.img_shape[0]//2, :, :]), cor_aspect)
-                self.sagital = (np.rot90(img3d[:, self.img_shape[1]//2, :]), sag_aspect)
+                self.sagittal = (np.rot90(img3d[:, self.img_shape[1]//2, :]), sag_aspect)
                 self.axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
 
-            if axis == 'axial':
+            if plane == 'axial':
                 coronal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), cor_aspect)
-                sagital = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), sag_aspect)
+                sagittal = (np.rot90(img3d[self.img_shape[0] // 2, :, :]), sag_aspect)
 
                 if pos == 'x':
                     self.ax_value_x = pos_x / self.img_shape[0]
                     self.coronal = coronal
                 elif pos == 'y':
                     self.ax_value_y = pos_y / self.img_shape[1]
-                    self.sagital = sagital
+                    self.sagittal = sagittal
 
-            elif axis == 'coronal':
+            elif plane == 'coronal':
                 axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
-                sagital = (np.rot90(img3d[self.img_shape[1] // 2, :, :]), sag_aspect)
+                sagittal = (np.rot90(img3d[self.img_shape[1] // 2, :, :]), sag_aspect)
 
                 if pos == 'x':
                     self.cor_value_x = pos_x / self.img_shape[0]
                     self.axial = axial
                 elif pos == 'y':
                     self.cor_value_y = pos_y / self.img_shape[1]
-                    self.sagital = sagital
+                    self.sagittal = sagittal
 
-            elif axis == 'sagital':
+            elif plane == 'sagittal':
                 axial = (img3d[:, :, self.img_shape[2]//2], ax_aspect)
                 coronal = (np.rot90(img3d[self.img_shape[2] // 2, :, :]), cor_aspect)
                 if pos == 'x':
@@ -168,7 +209,7 @@ class MainWidget(QWidget, ui.Ui_Form):
                     self.sag_value_y = pos_y / self.img_shape[1]
                     self.axial = axial
 
-            self.display(self.axial, self.coronal, self.sagital)
+            self.display(self.axial, self.coronal, self.sagittal)
 
         except Exception as e:
             logging.error(f'An error occurred in slices function ln 81: {e}')
@@ -179,16 +220,32 @@ class MainWidget(QWidget, ui.Ui_Form):
             msg.exec_()
             self.browse()
 
-    def generate_slice_vertical(self, value, axis):
+    def generate_slice_vertical(self, value, plane):
+        """
+        A function, more of a middleware for the change in the vertical slider. It calls the generate_image function
+        given the new orientation and the plane from which the slider was moved.
+        params:
+        :param value: the current value of the slider
+        :param plane: the plane from which the slider was moved {axial, coronal, sagittal}
+        :return:
+        """
         try:
-            self.generate_image(slices=self.slices, pos='x', pos_x=int((value/100) * self.img_shape[0]), axis=axis)
+            self.generate_image(slices=self.slices, pos='x', pos_x=int((value/100) * self.img_shape[0]), plane=plane)
 
         except Exception as e:
             print(e)
 
-    def generate_slice_horizontal(self, value, axis):
+    def generate_slice_horizontal(self, value, plane):
+        """
+        A function, more of a middleware for the change in the horizontal slider. It calls the generate_image function
+        given the new orientation and the plane from which the slider was moved.
+        params:
+        :param value: the current value of the slider
+        :param plane: the plane from which the slider was moved {axial, coronal, sagittal}
+        :return:
+        """
         try:
-            self.generate_image(slices=self.slices, pos='y', pos_y=int((value/100) * self.img_shape[0]), axis=axis)
+            self.generate_image(slices=self.slices, pos='y', pos_y=int((value/100) * self.img_shape[0]), plane=plane)
 
         except Exception as e:
             print(e)

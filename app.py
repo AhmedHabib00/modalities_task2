@@ -68,10 +68,12 @@ class MainWidget(QWidget, ui.Ui_Form):
         self.cor_widget, self.layout_vertical2 = self.gen_layout(self.Display_2)
         self.sag_widget, self.layout_vertical3 = self.gen_layout(self.Display_3)
 
-    def display_single_plot(self, img, aspect, widget, value_x, value_y):
+    @staticmethod
+    def display_single_plot(img, aspect, widget, value_x, value_y):
         widget.axis.clear()
-        widget.axis.axhline(y=self.img_shape[1] * value_y, color='r')
-        widget.axis.axvline(x=self.img_shape[0] * value_x, color='b')
+        print(value_y)
+        widget.axis.axhline(y=img.shape[0] * (1-value_y), color='r')
+        widget.axis.axvline(x=img.shape[1] * value_x, color='b')
         widget.axis.imshow(img, cmap='gray', aspect=aspect)
         widget.canvas.draw()
 
